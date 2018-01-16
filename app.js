@@ -81,9 +81,25 @@ if(!module.parent){
 
     var WebSocket = require('ws');
     const wss = new WebSocket.Server({ server });
+    function heartbeat() {
+      this.isAlive = true;
+    }
+    function noop(){}
     wss.on('connection', function(ws) {
+        ws.isAlive = true;
+        ws.on('pong', heartbeat);
         WS = ws;
     });
+    const interval = setInterval(function ping() {
+      wss.clients.forEach(function each(ws) {
+        if (ws.isAlive === false){
+            WS = null;
+            return ws.terminate();
+        }
+        ws.isAlive = false;
+        ws.ping(noop);
+      });
+    }, 30000);
 
     server.listen(config.port, function listening() {
       console.log('Listening on %d', server.address().port);

@@ -1,0 +1,22 @@
+{
+    "name": "githubhook",
+    "version": "1.0.0",
+    "description": "githubhook stack",
+    "author": "mpech",
+    "dependencies": {
+        "bluebird": "3.1.4",
+        "body-parser": "1.18.2",
+        "diskdb": "0.1.17",
+        "express": "4.16.2",
+        "method-override": "2.3.1",
+        "mocha": "3.5.0",
+        "nodelibs": "git://github.com:happyfreemo69/nodelibs.git#v1.10.2",
+        "optimist": "0.6.1"
+    },
+    "devDependencies": {
+        "colors": "1.1.2",
+        "supertest": "0.14.0"
+    },
+    "private": true,
+    "license": "MIT"
+}

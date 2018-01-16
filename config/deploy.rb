@@ -1,7 +1,7 @@
 # config/deploy.rb
 lock '3.4.0'
-set :application, 'githubhook'
-set :repo_url, 'git@github.com:happyfreemo69/githubhook.git'
+set :application, 'githubhook-server'
+set :repo_url, 'git@github.com:happyfreemo69/githubhook-server.git'
 
 set :branch, 'dev'
 set :scm, :git

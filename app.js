@@ -37,6 +37,9 @@ app.post('/generic-webhook-trigger/invoke', function(req, res, next){
     }
     var gid = req.headers['X-GitHub-Delivery'] || Date.now();
     var expiresAt = Date.now()+config.push_expiresAt;
+    if(typeof(req.body)=='string'){//in case we didnot supply application/json in tst...
+        req.body = JSON.parse(req.body);
+    }
     db.pushes.save(Object.assign({githubhook:{gid: gid, token: req.query.token, expiresAt: expiresAt}}, req.body));
     return res.status(200).send('ok');
 });
@@ -46,7 +49,8 @@ app.get('/pushes', function(req, res, next){
     if(req.query.light){
         pushes = pushes.map(x=>x._id);
     }
-    return res.status(200).send(pushes);
+    res.setHeader('Content-Type', 'application/json');
+    return res.status(200).send(JSON.stringify(pushes));
 })
 
 app.delete('/pushes/:id', function(req, res, next){

@@ -40,7 +40,7 @@ app.post('/generic-webhook-trigger/invoke', function(req, res, next){
     if(typeof(req.body)=='string'){//in case we didnot supply application/json in tst...
         req.body = JSON.parse(req.body);
     }
-    db.pushes.save(Object.assign({githubhook:{gid: gid, token: req.query.token, expiresAt: expiresAt}}, req.body));
+    db.pushes.save(Object.assign({githubhook:{gid: gid, token: req.query.token, expiresAt: expiresAt, url: req.url}}, req.body));
     WS && WS.send('push');
     return res.status(200).send('ok');
 });

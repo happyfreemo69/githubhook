@@ -63,6 +63,10 @@ app.delete('/pushes/:id', function(req, res, next){
     return res.status(200).send(ok?'ok':'ko');
 })
 
+app.get('/ping', function(req,res,next){
+    return res.status(200).send('OK');
+})
+
 app.get('*', function(req,res,next){
     res.status(404).send('route '+req.url+'not found');
 });
